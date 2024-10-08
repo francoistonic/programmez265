@@ -1,0 +1,594 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\fmodern\fcharset0 CourierNewPSMT;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue255;\red37\green127\blue159;
+\red144\green1\blue18;\red109\green109\blue109;\red15\green112\blue1;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c100000;\cssrgb\c16863\c56863\c68627;
+\cssrgb\c63922\c8235\c8235;\cssrgb\c50196\c50196\c50196;\cssrgb\c0\c50196\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs21\fsmilli10667 \cf0 [HttpGet("\{id\}")]
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 [Produces("application/json")]
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 [ProducesResponseType(StatusCodes.Status400BadRequest)]
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 [ProducesResponseType(StatusCodes.Status404NotFound)]
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 [ProducesResponseType(StatusCodes.Status200OK)]
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 public ActionResult<TodoItem> GetTodoItem(int id)
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \{
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0\'a0 if (id <= 0)
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0\'a0\'a0\'a0\'a0\'a0 return BadRequest("Id doit \'eatre sup\'e9rieur \'e0 0.");
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0\'a0 TodoItem? data = Datas.FirstOrDefault(item => item.ID == id);
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0\'a0\'a0 if (data == null)
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0\'a0\'a0\'a0\'a0\'a0 return NotFound($"Non trouv\'e9 avec l'ID = \{id\}");
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0\'a0 \'a0return Ok(data);
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \}
+\fs29\fsmilli14667 \
+\'a0\
+
+\fs21\fsmilli10667 [HttpGet()]
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 public ActionResult<IEnumerable<TodoItem>> GetTodoItems([FromQuery]int pageSize = 10,[FromQuery] int pageIndex = 0)\'a0
+\fs29\fsmilli14667 \
+\'a0\
+\'a0\
+
+\fs21\fsmilli10667 public ActionResult<TodoItem> CreateTodoItem([FromBody] CreateOrUpdateTodoItem dataToAdd)
+\fs29\fsmilli14667 \
+\'a0\
+
+\fs21\fsmilli10667 [HttpPut("\{id\}")]
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 public ActionResult UpdateTodoItem(int id, [FromBody] UpdateTodoItem dataToUpdate)
+\fs29\fsmilli14667 \
+\'a0\
+\'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs25\fsmilli12667 \cf0 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0 \cf3 public\cf0  \cf3 class\cf0  \cf4 OkObjectResult\cf0  : ObjectResult
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0 \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf3 private\cf0  \cf3 const\cf0  \cf3 int\cf0  DefaultStatusCode = StatusCodes.Status200OK;
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf3 public\cf0  \cf4 OkObjectResult\cf0 (\cf3 object\cf0 ? value)
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 : \cf3 base\cf0 (value)
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 StatusCode = DefaultStatusCode;
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \}
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\sa213\partightenfactor0
+
+\f1\fs25\fsmilli12667 \cf0 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0 \}
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\'a0\
+\'a0\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs21\fsmilli10667 \cf0 [HttpGet()]
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 [Produces("application/json")]
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 [ProducesResponseType(StatusCodes.Status200OK)]
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 [ProducesResponseType(StatusCodes.Status404NotFound)]
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 public ActionResult<IEnumerable<TodoItem>> GetTodoItems([FromQuery]int pageSize = 10,[FromQuery] int pageIndex = 0)
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \{
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0 \'a0 \'a0 if (Datas == null)
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0\'a0 \'a0 \'a0 \'a0 return NotFound($"Pas de donn\'e9es dans la liste");
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0 \'a0 \'a0 List<TodoItem> datas = Datas.Skip(pageSize * pageIndex)
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 .Take(pageSize)
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 \'a0 .ToList();
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \'a0 \'a0 \'a0 return Ok(datas);
+\fs29\fsmilli14667 \
+
+\fs21\fsmilli10667 \}
+\fs29\fsmilli14667 \
+\'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs25\fsmilli12667 \cf0 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0 \cf3 public\cf0  \cf3 class\cf0  \cf4 PersonCreateDTO
+\f0\fs29\fsmilli14667 \cf0 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0 \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 [Required]
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf3 public\cf0  \cf3 string\cf0  Nom \{ \cf3 get\cf0 ; \cf3 set\cf0 ; \}
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 [Required(ErrorMessage =\cf5 "Le pr\'e9nom est obligatoire"\cf0 )]
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf3 public\cf0  \cf3 string\cf0  Prenom \{ \cf3 get\cf0 ; \cf3 set\cf0 ; \}
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 [Range(1, 120)]
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf3 public\cf0  \cf3 int\cf0  Age \{ \cf3 get\cf0 ; \cf3 set\cf0 ; \}
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\sa213\partightenfactor0
+
+\f1\fs25\fsmilli12667 \cf0 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0 \}
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\'a0\
+\'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs25\fsmilli12667 \cf6 \expnd0\expndtw0\kerning0
+//\cf7  Service de log inject\'e9 par le constructeur
+\f0\fs29\fsmilli14667 \cf0 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs25\fsmilli12667 \cf3 \expnd0\expndtw0\kerning0
+private\cf0  \cf3 readonly\cf0  ILogger logger;
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \cf3 \expnd0\expndtw0\kerning0
+public\cf0  \cf4 TodoListController\cf0 (ILogger<TodoListController> _logger)
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\fi944\partightenfactor0
+
+\f1\fs25\fsmilli12667 \cf0 \expnd0\expndtw0\kerning0
+logger = _logger;
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+logger.LogInformation(\cf5 "CTOR"\cf0 );
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\'a0\
+\'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs25\fsmilli12667 \cf3 \expnd0\expndtw0\kerning0
+var\cf0  app = builder.Build();
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+app.Logger.LogInformation(\cf5 "D\'e9marrage du Web services"\cf0 );
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\'a0\
+\'a0\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs25\fsmilli12667 \cf0 [ApiVersion( "1.0" )]
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 [ApiVersion( "2.0" )]
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 [Route( "api/v\{version:apiVersion\}/[controller]" )]
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 [ApiController]
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 public class MonServiceController : ControllerBase
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 \{
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 \'a0\'a0\'a0\'a0[HttpGet]
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 \'a0\'a0\'a0\'a0public string Get() \{ return "MonService GET en version 1.0"\'a0; \}
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 \'a0
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 \'a0\'a0\'a0\'a0[HttpGet, MapToApiVersion( "2.0" )]
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 \'a0\'a0\'a0\'a0public string Get() \{ return "MonService GET en version 2.0"\'a0; \}
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 \}
+\fs29\fsmilli14667 \
+\'a0\
+\'a0\
+\'a0\
+
+\fs25\fsmilli12667 [ApiVersion( "3.0" )]
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 [Route( "api/v\{version:apiVersion\}/MonService" )]
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 public class MonServiceVersion3Controller: ControllerBase \{
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 \'a0\'a0\'a0\'a0[HttpGet
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 \'a0\'a0\'a0\'a0public string Get() => " MonService GET en version 2.0 !";
+\fs29\fsmilli14667 \
+
+\fs25\fsmilli12667 \}
+\fs29\fsmilli14667 \
+\'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs25\fsmilli12667 \cf0 \expnd0\expndtw0\kerning0
+builder.Services.AddApiVersioning(optVersion =>
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0 optVersion.DefaultApiVersion = \cf3 new\cf0  ApiVersion(1, 2);
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0 optVersion.ReportApiVersions = \cf3 true\cf0 ;
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\sa213\partightenfactor0
+
+\f1\fs25\fsmilli12667 \cf0 \expnd0\expndtw0\kerning0
+\});
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs25\fsmilli12667 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs21\fsmilli10667 \cf0 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf6 ///\cf7  \cf6 <summary>
+\f0\fs29\fsmilli14667 \cf0 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf6 ///\cf7  Lecture d'un Todo Item
+\f0\fs29\fsmilli14667 \cf0 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf6 ///\cf7  Retourne un todo item \'e0 partir de son identifiant ID
+\f0\fs29\fsmilli14667 \cf0 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf6 ///\cf7  \cf6 </summary>
+\f0\fs29\fsmilli14667 \cf0 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf6 ///\cf7  \cf6 <remarks>\cf7 ici une remarque\cf6 </remarks>
+\f0\fs29\fsmilli14667 \cf0 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf6 ///\cf7  \cf6 <param\cf0  \cf6 name="\cf0 id\cf6 ">\cf7 id du todo item doit \'eatre sup\'e9rieur \'e0 0.\cf6 </param>\cf7 \'a0\'a0
+\f0\fs29\fsmilli14667 \cf0 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf6 ///\cf7  \cf6 <response\cf0  \cf6 code="200">\cf7 OK, le todo item est retourn\'e9.\cf6 </response>
+\f0\fs29\fsmilli14667 \cf0 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf6 ///\cf7  \cf6 <response\cf0  \cf6 code="400">\cf7 Mauvaise requete, id non invalide.\cf6 </response>
+\f0\fs29\fsmilli14667 \cf0 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf6 ///\cf7  \cf6 <response\cf0  \cf6 code="404">\cf7 Erreur, item non trouv\'e9 avec l'id sp\'e9cifi\'e9.\cf6 </response>
+\f0\fs29\fsmilli14667 \cf0 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 [HttpGet()]
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 [Route(\cf5 "\{id\}"\cf0 )]
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 [Produces(\cf5 "application/json"\cf0 )]
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 [ProducesResponseType(StatusCodes.Status400BadRequest)]
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 [ProducesResponseType(StatusCodes.Status404NotFound)]
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 [ProducesResponseType(StatusCodes.Status200OK)]
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f1\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \cf3 public\cf0  ActionResult<TodoItem> GetTodoItem(\cf3 int\cf0  id)
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs24 \cf0 \expnd0\expndtw0\kerning0
+\'a0
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs21\fsmilli10667 \cf0 \expnd0\expndtw0\kerning0
+"/api/v\{version\}/TodoList/\{id\}": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0 "get": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "tags": [ "TodoList" ],
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "summary": \uc0\u8232 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 "Lecture d'un Todo Item\\r\\nRetourne un todo item a partir de son identifiant ID",
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "ici une remarque",
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "parameters": [
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "name": "id",
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "in": "path",
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "id du todo item doit \'eatre sup\'e9rieur \'e0 0.",
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "required": true,
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "schema": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "type": "integer",
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "format": "int32"
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \} \},
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "name": "version",
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "in": "path",
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "required": true,
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "schema": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "type": "string"
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \} \}],
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "responses": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "400": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "Mauvaise requete, id non invalide.",
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "content": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "application/json": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "schema": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "$ref": "#/components/schemas/ProblemDetails"
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \} \} \} \},
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "404": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "Erreur, le todo item n'est pas trouv\'e9 \'e0 partir de l'id sp\'e9cifi\'e9.",
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "content": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "application/json": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "schema": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "$ref": "#/components/schemas/ProblemDetails"
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \} \} \} \},
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "200": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "description": "OK, le todo item est retourn\'e9.",
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "content": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "application/json": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "schema": \{
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 "$ref": "#/components/schemas/TodoItem"
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+
+\f2\fs21\fsmilli10667 \expnd0\expndtw0\kerning0
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 \} \} \} \} \} \},
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\'a0\
+\'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs25\fsmilli12667 \cf3 \expnd0\expndtw0\kerning0
+string\cf0  connectionString = builder.Configuration.GetConnectionString(\cf5 "DefaultConnection"\cf0 );
+\f0\fs29\fsmilli14667 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\sa213\partightenfactor0
+
+\f1\fs25\fsmilli12667 \cf7 \expnd0\expndtw0\kerning0
+builder.Services.AddHealthChecks()\uc0\u8232 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 .AddSqlServer(connectionString);
+\f0\fs29\fsmilli14667 \cf0 \kerning1\expnd0\expndtw0 \
+}
